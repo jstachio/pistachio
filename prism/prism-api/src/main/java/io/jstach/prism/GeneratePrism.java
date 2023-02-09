@@ -52,12 +52,16 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 public @interface GeneratePrism {
 
-	/** The annotation to generate a prism for. */
+	/**
+	 * The annotation to generate a prism for.
+	 * @return annotation class.
+	 */
 	Class<? extends java.lang.annotation.Annotation> value();
 
 	/**
 	 * The name of the generated prism class. Defaults to XXPrism where XX is the simple
 	 * name of the annotation specified by value().
+	 * @return The name of the generated prism class.
 	 */
 	String name() default "";
 
@@ -65,6 +69,7 @@ public @interface GeneratePrism {
 	 * Set to true for the prism to have public access, otherwise the generated prism and
 	 * its members will be package visible. The default is sufficient if the prism is
 	 * generated in the same package as the AnnotationProcessor which uses them.
+	 * @return if the prism is to be made public
 	 */
 	boolean publicAccess() default false;
 

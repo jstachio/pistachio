@@ -69,6 +69,7 @@ import javax.tools.Diagnostic;
  * An AnnotationProcessor for generating prisms. Do not use this class directly.
  *
  * @author Bruce
+ * @author agentgt
  */
 // @GeneratePrisms({
 // @GeneratePrism(GeneratePrisms.class),
@@ -76,6 +77,12 @@ import javax.tools.Diagnostic;
 // })
 @SupportedAnnotationTypes({ "io.jstach.prism.GeneratePrism", "io.jstach.prism.GeneratePrisms" })
 public final class PrismGenerator extends AbstractProcessor {
+
+	/**
+	 * Required for service loader
+	 */
+	public PrismGenerator() {
+	}
 
 	@Override
 	public SourceVersion getSupportedSourceVersion() {

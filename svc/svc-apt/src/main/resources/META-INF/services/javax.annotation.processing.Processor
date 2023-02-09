@@ -1,2 +1,1 @@
-io.jstach.pistachio.svc.apt.ServiceProcessor
-io.jstach.pistachio.prism.apt.PrismGenerator
+io.jstach.svc.apt.ServiceProcessor

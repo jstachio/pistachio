@@ -56,7 +56,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 public @interface GeneratePrisms {
 
-	/** The Prisms to be generated */
+	/**
+	 * The Prisms to be generated.
+	 * @return a list of prisms to generate.
+	 */
 	GeneratePrism[] value();
 
 }

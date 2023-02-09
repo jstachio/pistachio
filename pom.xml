@@ -88,17 +88,6 @@
         <artifactId>jmustache</artifactId>
         <version>1.15</version>
       </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>pistachio</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>pistachio-apt</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-       
     </dependencies>
   </dependencyManagement>
   
@@ -340,10 +329,11 @@
     <profile>
       <!-- mvn -f doc clean package -Pjavadoc -->
       <id>javadoc</id>
-      <!-- unfortunately the only way to make this work is to change to the doc directory or use -f -->
-      <modules>
-        <module>doc</module>
-      </modules>
+      <activation>
+        <property>
+          <name>!javadoc.disable</name>
+        </property>
+      </activation>
       <build>
         <plugins>
           <plugin>

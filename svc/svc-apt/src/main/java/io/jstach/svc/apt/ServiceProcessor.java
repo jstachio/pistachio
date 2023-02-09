@@ -1,4 +1,4 @@
-package io.jstach.pistachio.svc.apt;
+package io.jstach.svc.apt;
 
 import static java.util.Objects.requireNonNull;
 
@@ -32,11 +32,22 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
-import org.eclipse.jdt.annotation.Nullable;
-
+/**
+ * This class is internal and is only public for the annotation processor framework.
+ *
+ * @author agentgt
+ *
+ */
 public class ServiceProcessor extends AbstractProcessor {
 
-	public static String SERVICE_PROVIDER_ANNOTATION = "io.jstach.pistachio.svc.ServiceProvider";
+	static String SERVICE_PROVIDER_ANNOTATION = "io.jstach.svc.ServiceProvider";
+
+	/**
+	 * To placate javadoc. This constructor is called by the ServiceLoader.
+	 */
+	public ServiceProcessor() {
+		super();
+	}
 
 	@Override
 	public SourceVersion getSupportedSourceVersion() {
@@ -48,7 +59,7 @@ public class ServiceProcessor extends AbstractProcessor {
 		return Set.of(SERVICE_PROVIDER_ANNOTATION);
 	}
 
-	private static @Nullable AnnotationMirror getMirror(String fqn, Element target) {
+	private static AnnotationMirror getMirror(String fqn, Element target) {
 		for (AnnotationMirror m : target.getAnnotationMirrors()) {
 			CharSequence mfqn = ((TypeElement) m.getAnnotationType().asElement()).getQualifiedName();
 			if (mfqn != null && fqn.contentEquals(mfqn))
@@ -200,7 +211,7 @@ public class ServiceProcessor extends AbstractProcessor {
 		return typeElementList;
 	}
 
-	private boolean isObject(@Nullable TypeMirror t) {
+	private boolean isObject(TypeMirror t) {
 		if (t instanceof DeclaredType dt) {
 			return ((TypeElement) dt.asElement()).getQualifiedName().toString().equals("java.lang.Object");
 		}
