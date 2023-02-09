@@ -29,7 +29,7 @@
   </modules>
   <scm>
     <connection>scm:git:https://github.com/jstachio/pistachio.git</connection>
-    <developerConnection>scm:git:https://github.com/jstachio/pistachio.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:jstachio/pistachio.git</developerConnection>
     <url>https://github.com/jstachio/pistachio/tree/main</url>
     <tag>HEAD</tag>
   </scm>
