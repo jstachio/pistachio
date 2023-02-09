@@ -38,14 +38,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: mvn install
-        run: ./mvnw --batch-mode --no-transfer-progress clean install -DskipTests=true
-      - name: Create Aggregate Javadoc
-        run: ./mvnw --batch-mode --no-transfer-progress -f doc clean package -Pjavadoc -DskipTests=true
+        run: ./mvnw --batch-mode --no-transfer-progress -Pdoc clean install -DskipTests=true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'doc/target/site/apidocs'
+          path: 'target/site/apidocs'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1

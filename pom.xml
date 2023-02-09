@@ -366,6 +366,57 @@
       </build>
     </profile>
     <profile>
+      <id>doc</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <show>public</show>
+              <!--  
+              <overview>src/main/javadoc/overview.html</overview>
+              -->
+              <docfilessubdirs>true</docfilessubdirs>
+              <doctitle>pistachio API ${project.version}</doctitle>
+              <windowtitle>pistachio API ${project.version}</windowtitle>
+              <header>
+                &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"&gt;&lt;/script&gt;&lt;script&gt;hljs.highlightAll();&lt;/script&gt;
+              </header>
+              <bottom>
+                <![CDATA[
+                Copyright &#169; {currentYear} {organizationName}. All rights reserved.
+                ]]>
+              </bottom>
+              <addStylesheets>
+                <addStylesheet>${javadoc.stylesheet}</addStylesheet>
+              </addStylesheets>
+              <tags>
+                <tag>
+                  <name>apiNote</name>
+                  <placement>a</placement>
+                  <head>API Note</head>
+                </tag>
+              </tags>
+              <additionalJOptions>--allow-script-in-comments</additionalJOptions>
+              <linksource>true</linksource>
+            </configuration>
+            <executions>
+              <execution>
+                <id>aggregate</id>
+                <goals>
+                  <goal>aggregate</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>format-apply</id>
       <activation>
         <property>
