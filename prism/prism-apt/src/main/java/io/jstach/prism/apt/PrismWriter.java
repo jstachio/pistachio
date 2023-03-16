@@ -83,22 +83,25 @@ class PrismWriter {
 
 	void writeMethod(String indent, PrintWriter out) {
 		if (arrayed) {
-			out.format("%s    /** \n", indent);
+			out.format("%s    /**\n", indent);
 			out.format(
-					"%s      * Returns a List&lt;%s&gt; representing the value of the {@code %s} member of the Annotation.\n",
+					"%s     * Returns a List&lt;%s&gt; representing the value of the {@code %s} member of the Annotation.\n",
 					indent, prismType, m);
-			out.format("%s      * @see %s#%s()\n", indent, ((TypeElement) m.getEnclosingElement()).getQualifiedName(),
+			out.format("%s     * @return list of values.\n", indent);
+
+			out.format("%s     * @see %s#%s()\n", indent, ((TypeElement) m.getEnclosingElement()).getQualifiedName(),
 					name);
-			out.format("%s      */ \n", indent);
+			out.format("%s     */ \n", indent);
 			out.format("%s    %sList<%s> %s() { return _%s; }\n\n", indent, access, prismType, name, name);
 		}
 		else {
-			out.format("%s    /** \n", indent);
-			out.format("%s      * Returns a %s representing the value of the {@code %s %s} member of the Annotation.\n",
+			out.format("%s    /**\n", indent);
+			out.format("%s     * Returns a %s representing the value of the {@code %s %s} member of the Annotation.\n",
 					indent, prismType, m.getReturnType(), m);
-			out.format("%s      * @see %s#%s()\n", indent, ((TypeElement) m.getEnclosingElement()).getQualifiedName(),
+			out.format("%s     * @return prism value.\n", indent);
+			out.format("%s     * @see %s#%s()\n", indent, ((TypeElement) m.getEnclosingElement()).getQualifiedName(),
 					name);
-			out.format("%s      */ \n", indent);
+			out.format("%s     */ \n", indent);
 			out.format("%s    %s%s %s() { return _%s; }\n\n", indent, access, prismType, name, name);
 		}
 	}
