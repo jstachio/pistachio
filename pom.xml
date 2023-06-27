@@ -14,7 +14,7 @@
   <properties>
     <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <metainf-services.version>1.9</metainf-services.version>
+    <metainf-services.version>1.11</metainf-services.version>
     <project.build.outputTimestamp>1679001179</project.build.outputTimestamp>
     <deploy>snapshot</deploy>
     <!-- 
