@@ -1,7 +1,7 @@
 import javax.annotation.processing.Processor;
 
 /**
- * 
+ *
  * Prism processor you almost never want to require this module.
  * @author agentgt
  *

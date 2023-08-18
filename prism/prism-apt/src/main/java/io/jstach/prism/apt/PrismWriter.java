@@ -7,17 +7,17 @@ import javax.lang.model.element.TypeElement;
 
 class PrismWriter {
 
-	String name;
+	final String name;
 
 	String mirrorType;
 
 	String prismType;
 
-	boolean arrayed;
+	final boolean arrayed;
 
-	ExecutableElement m;
+	final ExecutableElement m;
 
-	String access; // "public" or ""
+	final String access; // "public" or ""
 
 	PrismWriter(ExecutableElement m, boolean arrayed, String access) {
 		this.m = m;
@@ -37,11 +37,20 @@ class PrismWriter {
 	void writeField(String indent, PrintWriter out) {
 		out.format("%s    /** store prism value of %s */\n", indent, name);
 		if (arrayed) {
-			out.format("%s    private List<%s> _%s;\n\n", indent, prismType, name);
+			out.format("%s    private java.util.List<%s> _%s;\n\n", indent, prismType, name);
 		}
 		else {
-			out.format("%s    private %s _%s;\n\n", indent, prismType, name);
+			out.format("%s    private %s _%s;\n\n", indent, nullable(prismType), name);
 		}
+	}
+
+	static String nullable(String className) {
+		int index = className.lastIndexOf(".");
+		if (index < 1) {
+			return "@Nullable " + className;
+		}
+		return className.substring(0, index) + ".@Nullable " + className.substring(index + 1);
+
 	}
 
 	/* return source code that converts an expr of mirrorType to prismType. */
@@ -61,9 +70,10 @@ class PrismWriter {
 				out.format("%s        _%s = getArrayValues(\"%s\",%s.class);\n", indent, name, name, prismType);
 			}
 			else {
-				out.format("%s        List<%s> %sMirrors = getArrayValues(\"%s\",%s.class);\n", indent, mirrorType,
-						name, name, mirrorType);
-				out.format("%s         _%s = new ArrayList<%s>(%sMirrors.size());\n", indent, name, prismType, name);
+				out.format("%s        java.util.List<%s> %sMirrors = getArrayValues(\"%s\",%s.class);\n", indent,
+						mirrorType, name, name, mirrorType);
+				out.format("%s         _%s = new java.util.ArrayList<%s>(%sMirrors.size());\n", indent, name, prismType,
+						name);
 				out.format("%s        for(%s %sMirror : %sMirrors) {\n", indent, mirrorType, name, name);
 				out.format("%s            _%s.add(%s);\n", indent, name, mirror2prism(name + "Mirror"));
 				out.format("%s        }\n", indent);
@@ -92,7 +102,8 @@ class PrismWriter {
 			out.format("%s     * @see %s#%s()\n", indent, ((TypeElement) m.getEnclosingElement()).getQualifiedName(),
 					name);
 			out.format("%s     */ \n", indent);
-			out.format("%s    %sList<%s> %s() { return _%s; }\n\n", indent, access, prismType, name, name);
+			out.format("%s    %sjava.util.List<%s> %s() { return requireMember(_%s); }\n\n", indent, access, prismType,
+					name, name);
 		}
 		else {
 			out.format("%s    /**\n", indent);
@@ -102,7 +113,7 @@ class PrismWriter {
 			out.format("%s     * @see %s#%s()\n", indent, ((TypeElement) m.getEnclosingElement()).getQualifiedName(),
 					name);
 			out.format("%s     */ \n", indent);
-			out.format("%s    %s%s %s() { return _%s; }\n\n", indent, access, prismType, name, name);
+			out.format("%s    %s%s %s() { return requireMember(_%s); }\n\n", indent, access, prismType, name, name);
 		}
 	}
 
