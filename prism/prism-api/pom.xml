@@ -3,7 +3,7 @@
   <parent>
     <groupId>io.jstach.pistachio</groupId>
     <artifactId>pistachio-prism-parent</artifactId>
-    <version>0.1.2</version>
+    <version>0.1.3-SNAPSHOT</version>
   </parent>
   <artifactId>pistachio-prism</artifactId>
   <packaging>jar</packaging>
