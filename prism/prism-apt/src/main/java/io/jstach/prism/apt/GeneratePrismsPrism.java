@@ -80,7 +80,7 @@ class GeneratePrismsPrism {
 			memberValues.put(key.getSimpleName().toString(), mirror.getElementValues().get(key));
 		}
 		for (final ExecutableElement member : ElementFilter
-				.methodsIn(mirror.getAnnotationType().asElement().getEnclosedElements())) {
+			.methodsIn(mirror.getAnnotationType().asElement().getEnclosedElements())) {
 			defaults.put(member.getSimpleName().toString(), member.getDefaultValue());
 		}
 		final List<AnnotationMirror> valueMirrors = getArrayValues("value", AnnotationMirror.class);

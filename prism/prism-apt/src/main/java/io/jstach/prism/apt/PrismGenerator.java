@@ -143,9 +143,10 @@ public final class PrismGenerator extends AbstractProcessor {
 			if (generated.get(prismFqn).equals(ann.value())) {
 				return;
 			}
-			processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,
-					String.format("%s has already been generated for %s", prismFqn, generated.get(prismFqn)), e,
-					ann.mirror);
+			processingEnv.getMessager()
+				.printMessage(Diagnostic.Kind.ERROR,
+						String.format("%s has already been generated for %s", prismFqn, generated.get(prismFqn)), e,
+						ann.mirror);
 			return;
 		}
 		generatePrism(name, packageName, (DeclaredType) ann.value(), ann.publicAccess() ? "public " : "", otherPrisms);
@@ -220,8 +221,8 @@ public final class PrismGenerator extends AbstractProcessor {
 		finally {
 			out.close();
 		}
-		processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,
-				String.format("Generated prism %s for @%s", prismFqn, typeMirror));
+		processingEnv.getMessager()
+			.printMessage(Diagnostic.Kind.NOTE, String.format("Generated prism %s for @%s", prismFqn, typeMirror));
 	}
 
 	List<DeclaredType> inners = new ArrayList<>();

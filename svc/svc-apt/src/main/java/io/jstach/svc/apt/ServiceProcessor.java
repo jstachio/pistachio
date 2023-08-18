@@ -83,8 +83,8 @@ public class ServiceProcessor extends AbstractProcessor {
 		TypeElement servisaur = processingEnv.getElementUtils().getTypeElement(SERVICE_PROVIDER_ANNOTATION);
 
 		if (servisaur == null) {
-			processingEnv.getMessager().printMessage(Kind.WARNING,
-					SERVICE_PROVIDER_ANNOTATION + " class is missing. Skip processing.");
+			processingEnv.getMessager()
+				.printMessage(Kind.WARNING, SERVICE_PROVIDER_ANNOTATION + " class is missing. Skip processing.");
 			return false;
 		}
 
@@ -96,8 +96,8 @@ public class ServiceProcessor extends AbstractProcessor {
 			if (am == null)
 				continue;
 			if (!e.getKind().isClass() && !e.getKind().isInterface()) {
-				processingEnv.getMessager().printMessage(Kind.WARNING,
-						"Not correct type for annotation @" + SERVICE_PROVIDER_ANNOTATION, e);
+				processingEnv.getMessager()
+					.printMessage(Kind.WARNING, "Not correct type for annotation @" + SERVICE_PROVIDER_ANNOTATION, e);
 				continue;
 			}
 			TypeElement type = (TypeElement) e;
@@ -136,8 +136,9 @@ public class ServiceProcessor extends AbstractProcessor {
 				// missing and thus not created yet
 			}
 			catch (IOException x) {
-				processingEnv.getMessager().printMessage(Kind.ERROR,
-						"Failed to load existing service definition file. SPI: " + contract + " exception: " + x);
+				processingEnv.getMessager()
+					.printMessage(Kind.ERROR,
+							"Failed to load existing service definition file. SPI: " + contract + " exception: " + x);
 			}
 		}
 
