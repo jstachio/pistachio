@@ -3,7 +3,7 @@
   <parent>
     <groupId>io.jstach.pistachio</groupId>
     <artifactId>pistachio-svc-parent</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
   </parent>
   <artifactId>pistachio-svc-apt</artifactId>
   <build>
